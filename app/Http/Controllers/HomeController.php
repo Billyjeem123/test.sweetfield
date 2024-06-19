@@ -10,6 +10,10 @@ class HomeController extends Controller
 
          return view('home.index');
      }
+    public function testimonial(){
+
+        return view('home.testimonial');
+    }
 
 
     public function food_menu(){

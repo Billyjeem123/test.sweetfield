@@ -13,13 +13,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0 pe-4">
-                <a href="/" class="nav-item nav-link active">Home</a>
+                <a href="/" class="nav-item nav-link active ">Home</a>
                 <a href="{{route('about')}}" class="nav-item nav-link">About</a>
                 <a href="{{route('food_menu')}}" class="nav-item nav-link">Menu</a>
-                <a href="testimonial.html" class="nav-item nav-link">Testimonial</a>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="{{route('testimonial')}}" class="nav-item nav-link">Testimonial</a>
+                <a href="{{route('contact')}}" class="nav-item nav-link">Contact</a>
             </div>
-            <a href="menu.html" class="btn btn-primary py-2 px-4">Place Orders</a>
+            <a href="{{route('food_menu')}}" class="btn btn-primary py-2 px-4">Place Orders</a>
         </div>
     </nav>
 

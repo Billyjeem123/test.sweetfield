@@ -21,19 +21,19 @@
                         <div class="row g-3">
                             <div class="col-6 text-start">
                                 <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s"
-                                    src="img/food-img/food-14.jpg" />
+                                    src="assets/img/food-img/food-14.jpg" />
                             </div>
                             <div class="col-6 text-start">
                                 <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s"
-                                    src="img/food-img/food-38.jpg" style="margin-top: 25%" width="60%" />
+                                    src="assets/img/food-img/food-38.jpg" style="margin-top: 25%" width="60%" />
                             </div>
                             <div class="col-6 text-end">
                                 <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s"
-                                    src="img/food-img/food-31.jpg" width="60%" />
+                                    src="assets/img/food-img/food-31.jpg" width="60%" />
                             </div>
                             <div class="col-6 text-end">
                                 <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s"
-                                    src="img/food-img/food-12.jpg" />
+                                    src="assets/img/food-img/food-12.jpg" />
                             </div>
                         </div>
                     </div>

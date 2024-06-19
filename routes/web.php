@@ -20,5 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::view('/about', 'home.about')->name('about');
-
 Route::get('/menu', [HomeController::class, 'food_menu'])->name('food_menu');
+Route::get('/testimonial', [HomeController::class, 'testimonial'])->name('testimonial');
+Route::view('/contact', 'home.contact')->name('contact');
