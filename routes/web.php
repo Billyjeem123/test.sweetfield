@@ -39,6 +39,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/register', [AdminController::class, 'registerAdmin'])->name('admin.register');
     Route::get('/delete/user/{id}', [AdminController::class, 'delete_user'])->name('delete_user');
     Route::post('/menu/upload', [AdminController::class, 'uploadMenu'])->name('menu.upload');
+    Route::delete('/menu/delete/{id}', [AdminController::class, 'deleteMenu'])->name('menu.delete');
+    Route::get('/menu/view-image/{id}', [AdminController::class, 'viewImage'])->name('menu.viewImage');
 
     // Add more routes as needed
 

@@ -30,9 +30,10 @@
                                 <label for="menuName">Enter Menu Name</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="price" name="price" placeholder="Price">
-                                <label for="price">Price</label>
+                                <input type="number" class="form-control" id="portionPrice" name="price" placeholder="Price per Portion">
+                                <label for="portionPrice">Price per Portion (₦)</label>
                             </div>
+
                             <div class="mb-3">
                                 <label for="menuImage" class="form-label">Upload Menu Image</label>
                                 <input class="form-control bg-dark" type="file" id="menuImage" name="image">
@@ -45,48 +46,56 @@
                                         <label for="content">Content</label>
                                     </div>
                                 </div>
-
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                         </div>
                     </form>
+
 
                 </div>
                 <div class="col-md-12 col-xl-6">
                     <div class="bg-secondary rounded h-100 p-4">
                         <h6 class="mb-4">Uploaded Menu</h6>
                      <div class="table-responsive">
-                        <table class="table table-dark">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Menu Name</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Image</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Rice</td>
-                                    <td>₦ 2,000</td>
-                                    <td>img.jpeg</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Rice</td>
-                                    <td>₦ 2,000</td>
-                                    <td>img.jpeg</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Rice</td>
-                                    <td>₦ 2,000</td>
-                                    <td>img.jpeg</td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+
+                         <table class="table table-dark">
+                             <thead>
+                             <tr>
+                                 <th scope="col">#</th>
+                                 <th scope="col">Menu Name</th>
+                                 <th scope="col">Price per portion</th>
+                                 <th scope="col">Image</th>
+                                 <th scope="col">Actions</th>
+                             </tr>
+                             </thead>
+                             <tbody>
+                             @foreach($menus as $menu)
+                                 <tr>
+                                     <th scope="row">{{ $menu->id }}</th>
+                                     <td>{{ $menu->name }}</td>
+                                     <td>{{ $menu->price }}</td>
+                                     <td>
+                                         @if($menu->image)
+                                             <a href="{{ route('menu.viewImage', $menu->id) }}" target="_blank">View Image</a>
+                                         @else
+                                             No Image
+                                         @endif
+                                     </td>
+                                     <td>
+                                         <form action="{{ route('menu.delete', $menu->id) }}" method="POST">
+                                             @csrf
+                                             @method('DELETE')
+                                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                         </form>
+                                     </td>
+                                 </tr>
+                             @endforeach
+                             </tbody>
+                         </table>
+
                      </div>
+                        @include('home.partials._pagination', ['items' => $menus])
                     </div>
                 </div>
             </div>

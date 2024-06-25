@@ -1,0 +1,105 @@
+  <!-- ORDER MODAL -->
+        <div class="modal fade" id="orderForm" tabindex="-1" aria-labelledby="orderForm" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" id="modalImage" src="" alt="" style="height: 100px" />
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between align-items-center border-bottom pb-2" style="flex-wrap: wrap">
+                                                <span id="modalName"></span>
+                                                <span class="text-primary" id="modalPrice"></span>
+                                            </h5>
+
+                                            <p class="d-flex justify-content-between align-items-center border-bottom pb-2">
+                                                <span class="h5">Rice</span>
+                                                <span class="h6">
+                                            <small class="text-primary">/ portion</small><br />
+                                            400
+                                        </span>
+                                                <input type="text" id="menuId" name="menu_id">
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
+                                                <label for="portionCount" class="h5">Number of Portions:</label>
+                                                <input type="number" id="portionCount" class="form-control w-25" min="1" value="1">
+                                            </div>
+                                            <p class="d-flex justify-content-between align-items-center border-bottom pb-2">
+                                                <span class="h5">Total Price:</span>
+                                                <span class="h6 text-primary" id="totalPrice">₦400</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <h5 class="h5 text-dark">Order Type</h5>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="text-dark d-flex justify-content-start align-items-center">
+                                        <input type="checkbox" class="" id="home_delivery" />
+                                        <label for="home_delivery" class="mx-2">Home Delivery</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="text-dark d-flex justify-content-start align-items-center">
+                                        <input type="checkbox" class="" id="pick_up" />
+                                        <label for="pick_up" class="mx-2">Pick up</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="text-dark d-flex justify-content-start align-items-center">
+                                        <input type="checkbox" class="" id="dine_in" />
+                                        <label for="dine_in" class="mx-2">Dine-in</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="name" placeholder="Your Name" />
+                                        <label for="name">Your Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" placeholder="Your Email" />
+                                        <label for="email">Your Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="number" placeholder="Your Phone Number" />
+                                        <label for="number">Your Phone Number</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating date" id="date3" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />
+                                        <label for="datetime">Date & Time</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="address" placeholder="Your Address" />
+                                        <label for="address">Your Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Special Request" id="message" style="height: 100px"></textarea>
+                                        <label for="message">Special Request</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Place Order</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

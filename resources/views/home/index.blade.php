@@ -20,6 +20,7 @@
                                 <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s"
                                     src="/assets/img/food-img/food-14.jpg" />
                             </div>
+                            hh
                             <div class="col-6 text-start">
                                 <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s"
                                     src="/assets/img/food-img/food-38.jpg" style="margin-top: 25%" width="60%" />
@@ -206,89 +207,43 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show p-0 active">
                             <div class="row g-4">
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="/assets/img/food-img/food-31.jpg"
-                                            alt="" style="height: 150px" />
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2"
-                                                style="flex-wrap: wrap">
-                                                <span>Village Rice</span>
-                                                <span class="text-primary">$115</span>
-                                            </h5>
-                                            <small class="fst-italic d-flex justify-content-end">
-                                                <button class="btn btn-sm btn-primary" type="button"
-                                                    data-bs-toggle="modal" data-bs-target="#orderForm">
-                                                    Order
-                                                </button>
-                                            </small>
+                                @foreach($menus as $menu)
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center">
+                                            <img class="flex-shrink-0 img-fluid rounded" src="{{ $menu->image }}" alt="{{ $menu->name }}" style="height: 150px" />
+                                            <div class="w-100 d-flex flex-column text-start ps-4">
+                                                <h5 class="d-flex justify-content-between border-bottom pb-2" style="flex-wrap: wrap">
+                                                    <span>{{ $menu->name }}</span>
+                                                    <span class="text-primary">₦{{ number_format($menu->price, 2) }}</span>
+                                                </h5>
+                                                <small class="fst-italic d-flex justify-content-end">
+                                                    <button class="btn btn-sm btn-primary order-btn" type="button"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#orderForm"
+                                                            data-name="{{ $menu->name }}"
+                                                            data-price="{{ $menu->price }}"
+                                                            data-image="{{ $menu->image }}"
+                                                            data-content="{{ $menu->content }}"
+                                                        data-id="{{ $menu->id }}">
+                                                        Order
+                                                    </button>
+                                                </small>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="/assets/img/food-img/food-31.jpg"
-                                            alt="" style="height: 150px" />
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2"
-                                                style="flex-wrap: wrap">
-                                                <span>Village Rice</span>
-                                                <span class="text-primary">$115</span>
-                                            </h5>
-                                            <small class="fst-italic d-flex justify-content-end">
-                                                <button class="btn btn-sm btn-primary" type="button"
-                                                    data-bs-toggle="modal" data-bs-target="#orderForm">
-                                                    Order
-                                                </button>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="/assets/img/food-img/food-31.jpg"
-                                            alt="" style="height: 150px" />
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2"
-                                                style="flex-wrap: wrap">
-                                                <span>Village Rice</span>
-                                                <span class="text-primary">$115</span>
-                                            </h5>
-                                            <small class="fst-italic d-flex justify-content-end">
-                                                <button class="btn btn-sm btn-primary" type="button"
-                                                    data-bs-toggle="modal" data-bs-target="#orderForm">
-                                                    Order
-                                                </button>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="img/food-img/food-31.jpg"
-                                            alt="" style="height: 150px" />
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2"
-                                                style="flex-wrap: wrap">
-                                                <span>Village Rice</span>
-                                                <span class="text-primary">$115</span>
-                                            </h5>
-                                            <small class="fst-italic d-flex justify-content-end">
-                                                <button class="btn btn-sm btn-primary" type="button"
-                                                    data-bs-toggle="modal" data-bs-target="#orderForm">
-                                                    Order
-                                                </button>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
+
+
+
                             </div>
                         </div>
+                        @include('home.partials._pagination', ['items' => $menus])
                     </div>
                 </div>
             </div>
         </div>
-        <!-- ORDER MODAL -->
+
+
         <div class="modal fade" id="orderForm" tabindex="-1" aria-labelledby="orderForm" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content rounded-0">
@@ -298,40 +253,16 @@
                     </div>
                     <div class="modal-body">
                         <form>
+                            <input type="hidden" id="menuId" name="menu_id">
                             <div class="row g-3">
                                 <div class="col-12">
                                     <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="img/food-img/food-31.jpg"
-                                            alt="" style="height: 100px" />
+                                        <img id="modalImage" class="flex-shrink-0 img-fluid rounded" src="" alt="" style="height: 100px" />
                                         <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between align-items-center border-bottom pb-2"
-                                                style="flex-wrap: wrap">
-                                                <span>Village Rice</span>
-                                                <span class="text-primary">$115</span>
-                                            </h5>
-                                            <p
-                                                class="d-flex justify-content-between align-items-center border-bottom pb-2">
-                                                <span class="h5">Rice</span>
-                                                <span class="h6">
-                                                    <small class="text-primary">/ portion</small><br />
-                                                    400</span>
-                                            </p>
-                                            <p
-                                                class="d-flex justify-content-between align-items-center border-bottom pb-2">
-                                                <span class="h5">Fish</span>
-                                                <span class="h6">
-                                                    <small class="text-primary">Easy</small><br />
-                                                    800
-                                                </span>
-                                                <span class="h6">
-                                                    <small class="text-primary">Small</small><br />
-                                                    1000</span>
-                                                <span class="h6">
-                                                    <small class="text-primary">Medium</small><br />
-                                                    1500</span>
-                                                <span class="h6">
-                                                    <small class="text-primary">Big</small><br />
-                                                    1800</span>
+                                            <h5 id="modalName" class="d-flex justify-content-between align-items-center border-bottom pb-2" style="flex-wrap: wrap"></h5>
+                                            <p class="d-flex justify-content-between align-items-center border-bottom pb-2">
+                                                <span id="modalContent" class="h5"></span>
+                                                <span id="modalPrice" class="h6"></span>
                                             </p>
                                         </div>
                                     </div>
@@ -339,6 +270,15 @@
                                 <div class="col-12 mt-4">
                                     <h5 class="h5 text-dark">Order Type</h5>
                                 </div>
+                                <!-- Add your other inputs here -->
+                                <div class="col-12">
+                                    <label for="portionCount">Portions</label>
+                                    <input type="number" class="form-control" id="portionCount" name="portions" value="1" min="1">
+                                </div>
+                                <div class="col-12">
+                                    <h5 class="h5">Total Price: <span id="totalPrice"></span></h5>
+                                </div>
+
                                 <div class="col-sm-4">
                                     <div class="text-dark d-flex justify-content-start align-items-center">
                                         <input type="checkbox" class="" id="home_delivery" />
@@ -371,33 +311,29 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="number"
-                                            placeholder="Your Phone Number" />
+                                        <input type="number" class="form-control" id="number" placeholder="Your Phone Number" />
                                         <label for="number">Your Phone Number</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating date" id="date3" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" id="datetime"
-                                            placeholder="Date & Time" data-target="#date3"
-                                            data-toggle="datetimepicker" />
+                                        <input type="text" class="form-control datetimepicker-input" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />
                                         <label for="datetime">Date & Time</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="address"
-                                            placeholder="Your Address" />
+                                        <input type="text" class="form-control" id="address" placeholder="Your Address" />
                                         <label for="address">Your Address</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Special Request" id="message"
-                                            style="height: 100px"></textarea>
+                                        <textarea class="form-control" placeholder="Special Request" id="message" style="height: 100px"></textarea>
                                         <label for="message">Special Request</label>
                                     </div>
                                 </div>
+
 
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3" type="submit">
@@ -410,7 +346,8 @@
                 </div>
             </div>
         </div>
-        <!-- Menu End -->
+
+
 
         <!-- Advert start -->
         <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
@@ -621,4 +558,52 @@
         </div>
         <!-- Testimonial End -->
 
-        @include('home.includes.footer')
+
+
+
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var orderButtons = document.querySelectorAll('.order-btn');
+                var portionInput = document.getElementById('portionCount');
+                var totalPriceElement = document.getElementById('totalPrice');
+                var pricePerPortion;
+
+                orderButtons.forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        var name = button.getAttribute('data-name');
+                        var price = button.getAttribute('data-price');
+                        var image = button.getAttribute('data-image');
+                        var content = button.getAttribute('data-content');
+                        var id = button.getAttribute('data-id');
+
+                        document.getElementById('modalName').innerText = name;
+                        document.getElementById('modalPrice').innerText = '₦' + parseFloat(price).toFixed(2);
+                        document.getElementById('modalImage').src = image;
+                        document.getElementById('modalContent').innerText = content;
+
+                        // Set the menu id in a hidden input field or as a data attribute on the form if needed
+                        document.getElementById('menuId').value = id; // Assuming you have a hidden input with id "menuId"
+
+                        // Update the price per portion
+                        pricePerPortion = parseFloat(price);
+                        portionInput.value = 1;
+                        totalPriceElement.innerText = '₦' + pricePerPortion.toFixed(2);
+                    });
+                });
+
+                portionInput.addEventListener('input', function () {
+                    var portions = parseInt(portionInput.value);
+                    if (!isNaN(portions) && portions > 0) {
+                        var totalPrice = pricePerPortion * portions;
+                        totalPriceElement.innerText = '₦' + totalPrice.toFixed(2);
+                    }
+                });
+            });
+        </script>
+
+
+
+
+@include('home.includes.footer')

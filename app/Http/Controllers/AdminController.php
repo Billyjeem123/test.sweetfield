@@ -14,13 +14,15 @@ class AdminController extends Controller
     public function dashboard(){
 
         $usersCount = User::all()->count();
+        $menusCount = Menu::all()->count();
 
-        return  view('admin.index', ['usersCount' => $usersCount]);
+        return  view('admin.index', ['usersCount' => $usersCount, 'menusCount' => $menusCount]);
     }
 
     public function menu(){
 
-        return  view('admin.menu');
+       $menus = Menu::paginate(5);
+        return  view('admin.menu', ['items' => $menus, 'menus' => $menus]);
     }
 
 
@@ -142,7 +144,19 @@ class AdminController extends Controller
         return null;
     }
 
+    public function deleteMenu($id)
+    {
+        $menu = Menu::findOrFail($id);
+        $menu->delete();
 
+        return redirect()->back()->with('success', 'Menu deleted successfully!');
+    }
+
+    public function viewImage($id)
+    {
+        $menu = Menu::findOrFail($id);
+        return view('admin.view-image', compact('menu'));
+    }
 
 
 
