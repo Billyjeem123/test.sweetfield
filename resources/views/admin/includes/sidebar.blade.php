@@ -17,17 +17,14 @@
         <div class="navbar-nav w-100">
             <a href="{{route('admin.index')}}" class="nav-item nav-link {{ request()->routeIs('admin.index') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="{{route('menu')}}" class="nav-item nav-link {{ request()->routeIs('menu') ? 'active' : '' }}"><i class="fa fa-th me-2"></i>Menu</a>
+            <a href="{{route('users')}}" class="nav-item nav-link {{ request()->routeIs('users') ? 'active' : '' }}"><i class="fa fa-keyboard me-2"></i>Users</a>
             <a href="{{route('orders')}}" class="nav-item nav-link {{ request()->routeIs('orders') ? 'active' : '' }}"><i class="fa fa-keyboard me-2"></i>Orders</a>
             <a href="{{route('testimonials')}}" class="nav-item nav-link {{ request()->routeIs('testimonials') ? 'active' : '' }} "><i class="fa fa-table me-2"></i>Testimonial</a>
             <a href="{{route('messages')}}" class="nav-item nav-link {{ request()->routeIs('messages') ? 'active' : '' }}"><i class="fa fa-chart-bar me-2"></i>Messages</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Adverts</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="advertPages/homepage.html" class="dropdown-item">Home page</a>
-                    <a href="advertPages/aboutpage.html" class="dropdown-item">About page</a>
-                    <a href="advertPages/menupage.html" class="dropdown-item">Menu page</a>
-                    <a href="advertPages/testimonialpage.html" class="dropdown-item">Testimonial page</a>
-                    <a href="advertPages/contactpage.html" class="dropdown-item">Contact page</a>
+                    <a href="{{route('advert')}}" class="dropdown-item">Home page</a>
                 </div>
             </div>
         </div>

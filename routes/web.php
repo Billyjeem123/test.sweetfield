@@ -35,6 +35,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/testimonials', [AdminController::class, 'testimonials'])->name('testimonials');
     Route::get('/messages', [AdminController::class, 'messages'])->name('messages');
     Route::get('/advert', [AdminController::class, 'advert'])->name('advert');
+    Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::post('/register', [AdminController::class, 'registerAdmin'])->name('admin.register');
+    Route::get('/delete/user/{id}', [AdminController::class, 'delete_user'])->name('delete_user');
+    Route::post('/menu/upload', [AdminController::class, 'uploadMenu'])->name('menu.upload');
 
     // Add more routes as needed
 
