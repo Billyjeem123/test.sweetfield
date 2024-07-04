@@ -26,6 +26,10 @@ class AdminController extends Controller
     }
 
 
+
+
+
+
     public function orders(){
 
         return  view('admin.order');
@@ -157,6 +161,62 @@ class AdminController extends Controller
         $menu = Menu::findOrFail($id);
         return view('admin.view-image', compact('menu'));
     }
+
+    public function edit_menu($edit_menu){
+
+
+         $menu =  Menu::find($edit_menu);
+
+         return view ('admin.edit_menu', compact('menu'));
+
+
+}
+
+
+
+
+    public function update_menu(Request $request, $menu_id)
+    {
+        // Validate the form inputs
+        $validator = Validator::make($request->all(), [
+            'menuName' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'content' => 'nullable|string|max:255',
+            'contentPrice' => 'nullable|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        try {
+            $data = $validator->validated();
+
+            // Find the existing menu item
+            $menu = Menu::findOrFail($menu_id);
+
+            // Handle file upload
+            if ($request->hasFile('image')) {
+                $data['image'] = $this->uploadImage($request);
+            }
+
+            // Update the menu item
+            $menu->update([
+                'name' => $data['menuName'],
+                'price' => $data['price'],
+                'image' => $data['image'] ?? $menu->image, // Retain existing image if no new image is uploaded
+                'content' => $data['content'] ?? $menu->content,
+                'content_price' => $data['contentPrice'] ?? $menu->content_price
+            ]);
+
+            return redirect()->back()->with('success', 'Menu updated successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage());
+        }
+    }
+
+
 
 
 

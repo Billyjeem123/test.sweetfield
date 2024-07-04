@@ -24,13 +24,16 @@ Route::view('/about', 'home.about')->name('about');
 Route::get('/menu', [HomeController::class, 'food_menu'])->name('food_menu');
 Route::get('/testimonial', [HomeController::class, 'testimonial'])->name('testimonial');
 Route::view('/contact', 'home.contact')->name('contact');
+Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
 
 
 Route::prefix('admin')->group(function () {
 
     // Define your admin routes here
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.index');
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.index');
     Route::get('/menu', [AdminController::class, 'menu'])->name('menu');
+    Route::get('/edit_menu/{id}', [AdminController::class, 'edit_menu'])->name('edit_menu');
+    Route::post('/update_menu/{id}', [AdminController::class, 'update_menu'])->name('update_menu');
     Route::get('/orders', [AdminController::class, 'orders'])->name('orders');
     Route::get('/testimonials', [AdminController::class, 'testimonials'])->name('testimonials');
     Route::get('/messages', [AdminController::class, 'messages'])->name('messages');

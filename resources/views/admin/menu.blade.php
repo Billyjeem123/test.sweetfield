@@ -88,6 +88,8 @@
                                              @method('DELETE')
                                              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                          </form>
+
+                                         <a class="btn btn-primary" href="{{route('edit_menu', $menu->id )}}">Edit</a>
                                      </td>
                                  </tr>
                              @endforeach

@@ -23,4 +23,11 @@ class HomeController extends Controller
         return view('home.menu');
     }
 
+
+    public function cart(){
+
+        return  view('home.cart');
+    }
+
+
 }
