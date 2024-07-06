@@ -13,70 +13,74 @@
 
     @include('home.includes.navbar')
 
-    <!-- About Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6">
-                    <div class="row g-3">
-                        <div class="col-6 text-start">
-                            <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s"
-                                 src="assets/img/food-img/food-14.jpg" />
-                        </div>
-                        <div class="col-6 text-start">
-                            <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s"
-                                 src="assets/img/food-img/food-38.jpg" style="margin-top: 25%" width="60%" />
-                        </div>
-                        <div class="col-6 text-end">
-                            <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s"
-                                 src="assets/img/food-img/food-31.jpg" width="60%" />
-                        </div>
-                        <div class="col-6 text-end">
-                            <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s"
-                                 src="assets/img/food-img/food-12.jpg" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <h5 class="section-title ff-secondary text-start text-primary fw-normal">
-                        About Us
-                    </h5>
-                    <h1 class="mb-4">About Sweettaste Signature</h1>
-                    <p class="mb-4">
-                        Sweettaste Signature is the culmination of a lifelong passion for
-                        culinary excellence, inspired by the rich flavors and traditions
-                        of cuisines all around the globe.
-                    </p>
-                    <p class="mb-4">
-                        Our founder, grew up in a
-                        family of food enthusiasts, where mealtimes were always a
-                        celebration of love, laughter, and delicious food.
-                    </p>
-                    <h1 class="mb-4">Our Values</h1>
-                    <p class="mb-4">
-                        <span class="text-primary h5 ff-secondary">Quality:</span> We're obsessed with using only
-                        the best ingredients,
-                        sourced from local farmers and producers whenever possible.
-                    </p>
-                    <p class="mb-4">
-                        <span class="text-primary h5 ff-secondary">Community:</span>We believe in building strong
-                        relationships
-                        with our neighbors, supporting local businesses, and giving back to our community.
-                    </p>
-                    <p class="mb-4">
-                        <span class="text-primary h5 ff-secondary">Joy:</span>We're all about spreading love and
-                        happiness through food, drink, and good company!
-                    </p>
-                    <p class="my-4 p-3 text-light bg-primary">Whether you're a foodie, a local, or just visiting
-                        Portland, we invite you to experience
-                        the Bistro Bliss difference. Come taste the love we put into every dish, and let us become
-                        your new favorite gathering spot!</p>
-                    <h1 class="ff-secondary text-primary text-center">Join Us</h1>
+ <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Your cart</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Cart</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- About End -->
+        <!-- Navbar & Hero End -->
+
+
+        <!-- Cart Start -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+                <div class="text-center">
+                    <!-- <h5 class="section-title ff-secondary text-center text-primary fw-normal">Cart</h5> -->
+                    <h1 class="mb-5">What's in your cart</h1>
+                </div>
+                <table class="table table-responsive table-primary p-3">
+                    <thead>
+                      <tr>
+                        <th scope="col">Order No.</th>
+                        <th scope="col">Menu Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Rice</td>
+                        <td>₦2,000</td>
+                        <td><img src="/assets/img/food-img/food-1.jpg" height="60px" width="60px" alt=""></td>
+                        <td><button class="btn btn-sm btn-primary"><strong>X</strong></button></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Rice</td>
+                        <td>₦2,000</td>
+                        <td><img src="/assets/img/food-img/food-2.jpg" height="60px" width="60px" alt=""></td>
+                        <td><button class="btn btn-sm btn-primary"><strong>X</strong></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+             <table class="table table-responsive table-primary p-3">
+                 <thead>
+                     <tr>
+                        <th scope="col">Total Order</th>
+                        <th scope="col">Order</th>
+                      </tr>
+                 </thead>
+                 <tbody>
+                     <tr>
+                         <td>₦4,000</td>
+                         <td><button class="btn btn-sm btn-success"><strong>✓</strong></button></td>
+                     </tr>
+                 </tbody>
+             </table>
+            </div>
+        </div>
+        <!-- Cart End -->
+        
 
     <!-- Advert start -->
     <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">

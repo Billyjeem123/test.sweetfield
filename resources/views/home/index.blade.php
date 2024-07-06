@@ -9,6 +9,29 @@
         </div>
         <!-- Spinner End -->
         @include('home.includes.navbar')
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container my-5 py-5">
+                    <div class="row align-items-center g-5" style="min-height: 70vh !important">
+                        <div class="col-lg-8 m-auto text-center text-lg-start">
+                            <h1 class="display-3 text-white animated slideInLeft">
+                                Welcome to Sweettaste
+                            </h1>
+                            <p class="text-white animated slideInLeft mb-4 pb-2">
+                                Eating healthy food should be a lifestyle and that's what
+                                SWEETTASTE is all about. <br />
+                                We make good and tasty food to keep you coming back!
+                            </p>
+                            <a href="{{route('food_menu')}}" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Place
+                                Orders</a>
+                        </div>
+                        <!-- <div class="col-lg-6 text-center text-lg-end overflow-hidden">
+                            <img class="img-fluid" src="img/hero.png" alt="">
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
 
         <!-- About Start -->
         <div class="container-xxl py-5">
@@ -20,7 +43,7 @@
                                 <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s"
                                     src="/assets/img/food-img/food-14.jpg" />
                             </div>
-                            hh
+                            
                             <div class="col-6 text-start">
                                 <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s"
                                     src="/assets/img/food-img/food-38.jpg" style="margin-top: 25%" width="60%" />
