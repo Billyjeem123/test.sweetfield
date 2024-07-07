@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::view('/admin/login', 'admin.login')->name('admin.login');
+Route::post('/login_admin', [AdminController::class, 'login'])->name('login_admin');
+
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::view('/about', 'home.about')->name('about');
@@ -36,9 +38,10 @@ Route::post('/register', [HomeController::class, 'register'])->name('register');
 Route::post('/checkout', [HomeController::class, 'checkout'])->name('checkout');
 Route::post('/update-quantity/{id}', [HomeController::class, 'updateQuantity'])->name('updateQuantity');
 Route::get('/cart-count', [HomeController::class, 'cartCount'])->name('cart.count');
+Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+Route::post('/testimonial', [HomeController::class, 'save_testimonial'])->name('testimonial.store');
 
-
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
     // Define your admin routes here
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.index');
@@ -55,7 +58,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/menu/upload', [AdminController::class, 'uploadMenu'])->name('menu.upload');
     Route::delete('/menu/delete/{id}', [AdminController::class, 'deleteMenu'])->name('menu.delete');
     Route::get('/menu/view-image/{id}', [AdminController::class, 'viewImage'])->name('menu.viewImage');
-
+    Route::get('/testimonials', [AdminController::class, 'testimonials'])->name('testimonials');
+    Route::post('/testimonials/{id}/reject', [AdminController::class, 'reject'])->name('admin.testimonials.reject');
+    Route::post('/testimonials/{id}/approve', [AdminController::class, 'approve'])->name('admin.testimonials.approve');
     // Add more routes as needed
 
 });

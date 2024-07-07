@@ -86,38 +86,37 @@
                     </div>
                 </div>
                 <h1 class="mb-5 mt-3 text-center">Share your experience</h1>
-                <form>
+                <form method="POST" action="{{ route('testimonial.store') }}">
+                    @csrf
+
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="name" placeholder="Your Name" />
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required />
                                 <label for="name">Your Name</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="email" class="form-control" id="email" placeholder="Your Email" />
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required />
                                 <label for="email">Your Email</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="number" class="form-control" id="number"
-                                    placeholder="Your Phone Number" />
+                                <input type="number" class="form-control" id="number" name="number" placeholder="Your Phone Number" required />
                                 <label for="number">Your Phone Number</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="profession" class="form-control" id="number"
-                                    placeholder="Your Profession" />
+                                <input type="text" class="form-control" id="profession" name="profession" placeholder="Your Profession" required />
                                 <label for="profession">Your Profession</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Special Request" id="review"
-                                    style="height: 100px"></textarea>
+                                <textarea class="form-control" placeholder="Special Request" id="review" name="review" style="height: 100px" required></textarea>
                                 <label for="review">Review</label>
                             </div>
                         </div>
@@ -128,6 +127,7 @@
                         </div>
                     </div>
                 </form>
+
 
             </div>
         </div>

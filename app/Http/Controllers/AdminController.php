@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Testimonial;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -37,7 +39,8 @@ class AdminController extends Controller
 
     public function testimonials(){
 
-        return  view('admin.testimonials');
+        $testimonials = Testimonial::paginate(6);
+        return  view('admin.testimonials', ['testimonials' => $testimonials]);
     }
 
     public function messages(){
@@ -214,6 +217,51 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage());
         }
+    }
+
+
+
+    // Handle the admin login
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->role === 'admin') {
+                return redirect()->route('admin.index');
+            } else {
+                Auth::logout();
+                return redirect()->route('admin.login')->withErrors(['email' => 'Access denied.']);
+            }
+        }
+
+        return redirect()->route('admin.login')->withErrors(['email' => 'Invalid credentials.']);
+    }
+
+
+
+    public function reject($id)
+    {
+        $testimonial = Testimonial::findOrFail($id);
+        $testimonial->status = 'rejected';
+        $testimonial->save();
+
+        return redirect()->route('testimonials')->with('status', 'Testimonial rejected successfully.');
+    }
+
+    public function approve($id)
+    {
+        $testimonial = Testimonial::findOrFail($id);
+        $testimonial->status = 'approved';
+        $testimonial->save();
+
+        return redirect()->route('testimonials')->with('status', 'Testimonial approved successfully.');
     }
 
 

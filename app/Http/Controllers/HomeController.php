@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\UserAuthenticated;
 use App\Models\Cart;
 use App\Models\Menu;
+use App\Models\Testimonial;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -205,5 +206,37 @@ class HomeController extends Controller
 
         return redirect()->intended('/')->with('error', 'Invalid Credentials');
     }
+
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+
+
+    public function save_testimonial(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'number' => 'required|string|max:15',
+            'profession' => 'required|string|max:255',
+            'review' => 'required|string',
+        ]);
+
+        Testimonial::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'number' => $request->number,
+            'profession' => $request->profession,
+            'review' => $request->review,
+        ]);
+
+        return redirect()->back()->with('success', 'Testimonial submitted successfully.');
+}
 
 }

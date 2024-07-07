@@ -26,7 +26,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="">
+                    <form method="POST" action="{{route("login_admin")}}">
                         @csrf
 
                         <div class="mb-3">

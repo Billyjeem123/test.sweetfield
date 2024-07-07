@@ -116,10 +116,17 @@
 <tr>
     <td>₦{{ $cartItems->sum(function ($item) { return $item->menu->price * $item->quantity; }) }}</td>
     <td>
-        <a href="https://wa.me/2348117283226?text={{ urlencode($orderDetails) }}" class="btn btn-sm btn-success">
-            Order via WhatsApp
-        </a>
+        @if(Auth::check())
+            <a href="https://wa.me/2348117283226?text={{ urlencode($orderDetails) }}" class="btn btn-sm btn-success">
+                Order via WhatsApp
+            </a>
+        @else
+            <a href="{{ route('login') }}" class="btn btn-sm btn-primary">
+                Login to Order via WhatsApp
+            </a>
+        @endif
     </td>
+
 
 </tr>
             </tbody>
