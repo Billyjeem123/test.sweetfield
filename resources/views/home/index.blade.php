@@ -43,7 +43,7 @@
                                 <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s"
                                     src="/assets/img/food-img/food-14.jpg" />
                             </div>
-                            
+
                             <div class="col-6 text-start">
                                 <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s"
                                     src="/assets/img/food-img/food-38.jpg" style="margin-top: 25%" width="60%" />
@@ -239,18 +239,31 @@
                                                     <span>{{ $menu->name }}</span>
                                                     <span class="text-primary">₦{{ number_format($menu->price, 2) }}</span>
                                                 </h5>
+
+                                                <br>
                                                 <small class="fst-italic d-flex justify-content-end">
-                                                    <button class="btn btn-sm btn-primary order-btn" type="button"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#orderForm"
-                                                            data-name="{{ $menu->name }}"
-                                                            data-price="{{ $menu->price }}"
-                                                            data-image="{{ $menu->image }}"
-                                                            data-content="{{ $menu->content }}"
-                                                        data-id="{{ $menu->id }}">
-                                                        Order
-                                                    </button>
+                                                    <a class="btn btn-sm btn-primary order-btn"
+                                                       href="{{ route('addToCart', $menu->id) }}">
+                                                        Add to Cart
+                                                    </a>
                                                 </small>
+
+{{--                                                <small class="fst-italic d-flex justify-content-end">--}}
+{{--                                                    <button class="btn btn-sm btn-primary order-btn" type="button"--}}
+{{--                                                            data-bs-toggle="modal"--}}
+{{--                                                            data-bs-target="#orderForm"--}}
+{{--                                                            data-name="{{ $menu->name }}"--}}
+{{--                                                            data-price="{{ $menu->price }}"--}}
+{{--                                                            data-image="{{ $menu->image }}"--}}
+{{--                                                            data-content="{{ $menu->content }}"--}}
+{{--                                                        data-id="{{ $menu->id }}">--}}
+{{--                                                        Order--}}
+{{--                                                    </button>--}}
+{{--                                                </small>--}}
+
+
+
+
                                             </div>
                                         </div>
                                     </div>

@@ -19,12 +19,23 @@ use Illuminate\Support\Facades\Route;
 //    return view('home.index');
 //});
 
+Route::view('/admin/login', 'admin.login')->name('admin.login');
+
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::view('/about', 'home.about')->name('about');
 Route::get('/menu', [HomeController::class, 'food_menu'])->name('food_menu');
 Route::get('/testimonial', [HomeController::class, 'testimonial'])->name('testimonial');
 Route::view('/contact', 'home.contact')->name('contact');
 Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
+Route::get('/add-to-cart/{id}', [HomeController::class, 'addToCart'])->name('addToCart');
+Route::delete('/remove-from-cart/{id}', [HomeController::class, 'removeFromCart'])->name('removeFromCart');
+Route::view('/login', 'home.login')->name('login');
+Route::view('/register', 'home.registration')->name('register');
+Route::post('/user/login', [HomeController::class, 'loginUser'])->name('userLogin');
+Route::post('/register', [HomeController::class, 'register'])->name('register');
+Route::post('/checkout', [HomeController::class, 'checkout'])->name('checkout');
+Route::post('/update-quantity/{id}', [HomeController::class, 'updateQuantity'])->name('updateQuantity');
+Route::get('/cart-count', [HomeController::class, 'cartCount'])->name('cart.count');
 
 
 Route::prefix('admin')->group(function () {

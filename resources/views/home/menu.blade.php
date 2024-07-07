@@ -39,6 +39,7 @@
                         <a href="#bulkform" type="button" data-bs-toggle="modal" class="btn btn-primary py-2 px-4">Click
                             to Get Bulk Food in Litres</a>
                     </div>
+
                     <!-- BULK MODAL -->
                     <div class="modal fade" id="bulkform" tabindex="-1" aria-labelledby="bulkform" aria-hidden="true">
                         <div class="modal-dialog">
@@ -46,12 +47,12 @@
                                 <div class="modal-header">
                                     <h5 class="modal-title"><a href="#" class="btn btn-sm btn-primary">Contact</a></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                            aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col ">
-                                            <img src="img/food-img/bulkFood.jpg" class="w-100" width="40px" height="auto" alt="..." />
+                                            <img src="/assets/img/food-img/bulkFood.jpg" class="w-100" width="40px" height="auto" alt="..." />
                                         </div>
                                     </div>
                                 </div>
@@ -62,104 +63,36 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show p-0 active">
                             <div class="row g-4">
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="img/food-img/food-31.jpg"
-                                            alt="" style="height: 150px" />
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2"
-                                                style="flex-wrap: wrap">
-                                                <span>Village Rice</span>
-                                                <span class="text-primary">$115</span>
-                                            </h5>
-                                            <small class="fst-italic d-flex justify-content-end">
-                                                <button class="btn btn-sm btn-primary" type="button"
-                                                    data-bs-toggle="modal" data-bs-target="#orderForm">
-                                                    Order
-                                                </button>
-                                            </small>
+                                @foreach($menus as $menu)
+                                    <div class="col-lg-6">
+                                        <div class="d-flex align-items-center">
+                                            <img class="flex-shrink-0 img-fluid rounded" src="{{ $menu->image }}" alt="{{ $menu->name }}" style="height: 150px" />
+                                            <div class="w-100 d-flex flex-column text-start ps-4">
+                                                <h5 class="d-flex justify-content-between border-bottom pb-2" style="flex-wrap: wrap">
+                                                    <span>{{ $menu->name }}</span>
+                                                    <span class="text-primary">₦{{ number_format($menu->price, 2) }}</span>
+                                                </h5>
+                                                <small class="fst-italic d-flex justify-content-end">
+                                                    <a class="btn btn-sm btn-primary order-btn"
+                                                       href="{{ route('addToCart', $menu->id) }}">
+                                                        Add to Cart
+                                                    </a>
+                                                </small>
+
+
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="img/food-img/food-31.jpg"
-                                            alt="" style="height: 150px" />
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2"
-                                                style="flex-wrap: wrap">
-                                                <span>Village Rice</span>
-                                                <span class="text-primary">$115</span>
-                                            </h5>
-                                            <small class="fst-italic d-flex justify-content-end">
-                                                <button class="btn btn-sm btn-primary" type="button"
-                                                    data-bs-toggle="modal" data-bs-target="#orderForm">
-                                                    Order
-                                                </button>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="img/food-img/food-31.jpg"
-                                            alt="" style="height: 150px" />
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2"
-                                                style="flex-wrap: wrap">
-                                                <span>Village Rice</span>
-                                                <span class="text-primary">$115</span>
-                                            </h5>
-                                            <small class="fst-italic d-flex justify-content-end">
-                                                <button class="btn btn-sm btn-primary" type="button"
-                                                    data-bs-toggle="modal" data-bs-target="#orderForm">
-                                                    Order
-                                                </button>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="img/food-img/food-31.jpg"
-                                            alt="" style="height: 150px" />
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2"
-                                                style="flex-wrap: wrap">
-                                                <span>Village Rice</span>
-                                                <span class="text-primary">$115</span>
-                                            </h5>
-                                            <small class="fst-italic d-flex justify-content-end">
-                                                <button class="btn btn-sm btn-primary" type="button"
-                                                    data-bs-toggle="modal" data-bs-target="#orderForm">
-                                                    Order
-                                                </button>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center">
-                                        <img class="flex-shrink-0 img-fluid rounded" src="img/food-img/food-31.jpg"
-                                            alt="" style="height: 150px" />
-                                        <div class="w-100 d-flex flex-column text-start ps-4">
-                                            <h5 class="d-flex justify-content-between border-bottom pb-2"
-                                                style="flex-wrap: wrap">
-                                                <span>Village Rice</span>
-                                                <span class="text-primary">$115</span>
-                                            </h5>
-                                            <small class="fst-italic d-flex justify-content-end">
-                                                <button class="btn btn-sm btn-primary" type="button"
-                                                    data-bs-toggle="modal" data-bs-target="#orderForm">
-                                                    Order
-                                                </button>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
+
+
+
                             </div>
                         </div>
+                        @include('home.partials._pagination', ['items' => $menus])
                     </div>
+
+
                 </div>
             </div>
         </div>

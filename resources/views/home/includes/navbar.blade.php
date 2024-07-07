@@ -20,7 +20,19 @@
                 <a href="{{route('contact')}}" class="nav-item nav-link" id="active-contact">Contact</a>
             </div>
             <a href="{{route('food_menu')}}" class="btn btn-primary py-2 px-4">Place Orders</a>
-            <a href="{{route('cart')}}" class="btn btn-light p-2"><img src="/assets/img/shopping-cart-icon-29081.png" width="20px" alt=""></a>
+            <a href="{{route('cart')}}"  class="btn btn-light p-2"><img src="/assets/img/shopping-cart-icon-29081.png" width="20px" alt=""></a>
+            <span   id="cart-count"  class="badge bg-secondary">0</span>
         </div>
     </nav>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('{{ route('cart.count') }}')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('cart-count').innerText = data.count;
+                });
+        });
+    </script>
 

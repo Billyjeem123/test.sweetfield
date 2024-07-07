@@ -29,60 +29,109 @@
         <!-- Navbar & Hero End -->
 
 
-        <!-- Cart Start -->
-        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="container">
-                <div class="text-center">
-                    <!-- <h5 class="section-title ff-secondary text-center text-primary fw-normal">Cart</h5> -->
-                    <h1 class="mb-5">What's in your cart</h1>
-                </div>
-                <table class="table table-responsive table-primary p-3">
-                    <thead>
-                      <tr>
-                        <th scope="col">Order No.</th>
-                        <th scope="col">Menu Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Rice</td>
-                        <td>₦2,000</td>
-                        <td><img src="/assets/img/food-img/food-1.jpg" height="60px" width="60px" alt=""></td>
-                        <td><button class="btn btn-sm btn-primary"><strong>X</strong></button></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Rice</td>
-                        <td>₦2,000</td>
-                        <td><img src="/assets/img/food-img/food-2.jpg" height="60px" width="60px" alt=""></td>
-                        <td><button class="btn btn-sm btn-primary"><strong>X</strong></button></td>
-                      </tr>
-                    </tbody>
-                  </table>
-             <table class="table table-responsive table-primary p-3">
-                 <thead>
-                     <tr>
-                        <th scope="col">Total Order</th>
-                        <th scope="col">Order</th>
-                      </tr>
-                 </thead>
-                 <tbody>
-                     <tr>
-                         <td>₦4,000</td>
-                         <td><button class="btn btn-sm btn-success"><strong>✓</strong></button></td>
-                     </tr>
-                 </tbody>
-             </table>
-            </div>
-        </div>
-        <!-- Cart End -->
-        
 
-    <!-- Advert start -->
+<!-- resources/views/cart/index.blade.php -->
+
+<!-- resources/views/cart/index.blade.php -->
+
+
+
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="text-center">
+            <h1 class="mb-5">What's in your cart</h1>
+        </div>
+
+        @if($cartItems->isEmpty())
+            <div class="alert alert-danger" role="alert">
+                No items found in cart.
+            </div>
+        @endif
+
+
+        <table class="table table-responsive table-primary p-3">
+            <thead>
+            <tr>
+                <th scope="col">Order No.</th>
+                <th scope="col">Menu Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Image</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+
+
+            @foreach ($cartItems as $item)
+                <tr>
+                    <th scope="row">{{ $loop->iteration }}</th>
+                    <td>{{ $item->menu->name }}</td>
+                    <td>₦{{ $item->menu->price }}</td>
+                    <td><img src="{{ asset($item->menu->image) }}" height="60px" width="60px" alt="{{ $item->menu->name }}"></td>
+                    <td>
+                        <form action="{{ route('updateQuantity', $item->id) }}" method="POST">
+                            @csrf
+                            <div class="input-group">
+                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="this.parentNode.querySelector('input[type=number]').stepDown();">-</button>
+                                <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" class="form-control">
+                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="this.parentNode.querySelector('input[type=number]').stepUp();">+</button>
+                                <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                            </div>
+                        </form>
+
+                    </td>
+                    <td>₦{{ $item->menu->price * $item->quantity }}</td>
+                    <td>
+                        <form action="{{ route('removeFromCart', $item->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger"><strong>X</strong></button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+        <table class="table table-responsive table-primary p-3">
+            <thead>
+            <tr>
+                <th scope="col">Total Order</th>
+                <th scope="col">Order</th>
+            </tr>
+            </thead>
+            <tbody>
+{{--            <tr>--}}
+{{--                <td>₦{{ $cartItems->sum(function ($item) { return $item->menu->price * $item->quantity; }) }}</td>--}}
+{{--               <td>--}}
+{{--                    <form action="{{ route('checkout') }}" method="POST">--}}
+{{--                        @csrf--}}
+{{--                        <button type="submit" class="btn btn-sm btn-success"><strong>✓</strong></button>--}}
+{{--                    </form>--}}
+{{--                </td>    --}}
+{{--            </tr>--}}
+
+
+<tr>
+    <td>₦{{ $cartItems->sum(function ($item) { return $item->menu->price * $item->quantity; }) }}</td>
+    <td>
+        <a href="https://wa.me/2348117283226?text={{ urlencode($orderDetails) }}" class="btn btn-sm btn-success">
+            Order via WhatsApp
+        </a>
+    </td>
+
+</tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+<!-- Advert start -->
     <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
         <div class="ads p-5 bg-primary my-5 d-flex justify-content-center align-items-center flex-column">
             <p class="text-light text-center">You can advertise you business here</p>
