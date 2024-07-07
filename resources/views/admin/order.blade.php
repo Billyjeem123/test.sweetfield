@@ -14,7 +14,7 @@
 
         <!-- Content Start -->
         <div class="content">
-            @include('admin.includes.navbar')fbg
+            @include('admin.includes.navbar')
 
             <!-- Orders Start -->
             <div class="container-fluid pt-4 px-4">
@@ -22,30 +22,44 @@
 
                     <div class="col-md-12 mb-4">
                         <div class="bg-secondary rounded h-100 p-4">
-                            <h6 class="mb-4">Customer's Order(s)</h6>
+                            <h6 class="mb-4">Customer Special Request(s)</h6>
                          <div class="table-responsive">
-                            <table class="table table-dark">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Order No.</th>
-                                        <th scope="col">Menu Name</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Image</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Rice</td>
-                                        <td>₦ 2,000</td>
-                                        <td>img.jpeg</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                             <table class="table table-dark">
+                                 <thead>
+                                 <tr>
+                                     <th scope="col">Order No.</th>
+                                     <th scope="col">Order Type</th>
+                                     <th scope="col">Name</th>
+                                     <th scope="col">Email</th>
+                                     <th scope="col">Phone Number</th>
+                                     <th scope="col">Date & Time</th>
+                                     <th scope="col">Address</th>
+{{--                                     <th scope="col">Menu</th>--}}
+                                     <th scope="col">Special Request</th>
+                                 </tr>
+                                 </thead>
+                                 <tbody>
+                                 @foreach($specialOrders as $order)
+                                     <tr>
+                                         <td>{{ $order->id }}</td>
+                                         <td>{{ $order->order_type }}</td>
+                                         <td>{{ $order->name }}</td>
+                                         <td>{{ $order->email }}</td>
+                                         <td>{{ $order->phone_number }}</td>
+                                         <td>{{ $order->date_time }}</td>
+                                         <td>{{ $order->address }}</td>
+{{--                                         <td>{{ $order->menu }}</td>--}}
+                                         <td>{{ $order->special_request }}</td>
+                                     </tr>
+                                 @endforeach
+                                 </tbody>
+                             </table>
+
                          </div>
                         </div>
                     </div>
                     <!-- ----- -->
+                    @include('admin.partials._pagination', ['items' => $specialOrders])
                 </div>
              </div>
                 <!-- Orders End -->

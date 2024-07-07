@@ -41,8 +41,8 @@
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-area fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Today Advert</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <p class="mb-2">Total Special Orders</p>
+                                <h6 class="mb-0">{{$orders}}</h6>
                             </div>
                         </div>
                     </div>
@@ -50,8 +50,8 @@
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Total Messages</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <p class="mb-2">Total Advert</p>
+                                <h6 class="mb-0">0</h6>
                             </div>
                         </div>
                     </div>
@@ -66,71 +66,45 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Salse</h6>
+                        <h6 class="mb-0">Customer Special Orders</h6>
                         <a href="">Show All</a>
                     </div>
                     <div class="table-responsive">
+
+
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                             <thead>
                                 <tr class="text-white">
-                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Invoice</th>
-                                    <th scope="col">Customer</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">Order No.</th>
+                                    <th scope="col">Order Type</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Phone Number</th>
+                                    <th scope="col">Date & Time</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Special Request</th>
                                 </tr>
                             </thead>
+
                             <tbody>
+                            @if($specialOrders->isEmpty($specialOrders))
+                                <p>No Order found</p>
+                            @endif
+                            @foreach($specialOrders as $order)
                                 <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                    <td>{{ $order->id }}</td>
+                                    <td>{{ $order->order_type }}</td>
+                                    <td>{{ $order->name }}</td>
+                                    <td>{{ $order->phone_number }}</td>
+                                    <td>{{ $order->date_time }}</td>
+                                    <td>{{ $order->address }}</td>
+                                    <td>{{ $order->special_request }}</td>
                                 </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
+                    <!-- ----- -->
+                    @include('admin.partials._pagination', ['items' => $specialOrders])
                 </div>
             </div>
             <!-- Recent Sales End -->

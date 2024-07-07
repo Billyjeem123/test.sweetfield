@@ -97,13 +97,13 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5 mt-2" href="about.blade.php">Read More</a>
+                        <a class="btn btn-primary py-3 px-5 mt-2" href="{{route('about')}}">Read More</a>
                         <div
                             class="ads p-5 bg-primary my-5 d-flex justify-content-center align-items-center flex-column">
                             <p class="text-light text-center">
                                 You can advertise you business here
                             </p>
-                            <a href="#" class="btn btn-dark btn-sm m-auto text-light">Contact</a>
+                            <a href="{{route('contact')}}" class="btn btn-dark btn-sm m-auto text-light">Contact</a>
                         </div>
                     </div>
                 </div>
@@ -413,77 +413,75 @@
                             Reservation
                         </h5>
                         <h1 class="text-white mb-4">Place Orders</h1>
-                        <form>
+                        <form action="{{ route('special-order.store') }}" method="POST">
+                            @csrf
                             <div class="row g-3">
                                 <div class="col-12">
                                     <h5 class="h5 text-white">Order Type</h5>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="text-white d-flex justify-content-start align-items-center">
-                                        <input type="checkbox" class="" id="home_delivery" />
+                                        <input type="radio" name="order_type" value="home_delivery" id="home_delivery" required  />
                                         <label for="home_delivery" class="mx-2">Home Delivery</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="text-white d-flex justify-content-start align-items-center">
-                                        <input type="checkbox" class="" id="pick_up" />
+                                        <input type="radio" name="order_type" value="pick_up" id="pick_up" />
                                         <label for="pick_up" class="mx-2">Pick up</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="text-white d-flex justify-content-start align-items-center">
-                                        <input type="checkbox" class="" id="dine_in" />
+                                        <input type="radio" name="order_type" value="dine_in" id="dine_in" />
                                         <label for="dine_in" class="mx-2">Dine-in</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name" />
+                                        <input type="text" name="name" required  class="form-control" id="name" placeholder="Your Name" />
                                         <label for="name">Your Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email" />
+                                        <input type="email" name="email" required  class="form-control" id="email" placeholder="Your Email" />
                                         <label for="email">Your Email</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="number"
-                                            placeholder="Your Phone Number" />
+                                        <input type="number" name="phone_number"   required class="form-control" id="number" placeholder="Your Phone Number" />
                                         <label for="number">Your Phone Number</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating date" id="date3" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" id="datetime"
-                                            placeholder="Date & Time" data-target="#date3"
-                                            data-toggle="datetimepicker" />
+                                        <input type="date" name="date_time" class="form-control  datetimepicker-input" id="datetime"
+                                               placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" required  />
                                         <label for="datetime">Date & Time</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="address"
-                                            placeholder="Your Address" />
+                                        <input type="text" required  name="address" class="form-control" id="address" placeholder="Your Address" />
                                         <label for="address">Your Address</label>
                                     </div>
                                 </div>
+{{--                                <div class="col-12">--}}
+{{--                                    <div class="form-floating">--}}
+{{--                                        <select name="menu" class="form-select" id="menu">--}}
+{{--                                            <option value="1">Menu 1</option>--}}
+{{--                                            <option value="2">Menu 2</option>--}}
+{{--                                            <option value="3">Menu 3</option>--}}
+{{--                                        </select>--}}
+{{--                                        <label for="menu">Choose From Menu</label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <select class="form-select" id="menu">
-                                            <option value="1">Menu 1</option>
-                                            <option value="2">Menu 2</option>
-                                            <option value="3">Menu 3</option>
-                                        </select>
-                                        <label for="select1">Choose From Menu</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Special Request" id="message"
-                                            style="height: 100px"></textarea>
+                <textarea name="special_request" class="form-control"  required placeholder="Special Request" id="message"
+                          style="height: 100px"></textarea>
                                         <label for="message">Special Request</label>
                                     </div>
                                 </div>
@@ -495,6 +493,8 @@
                                 </div>
                             </div>
                         </form>
+
+
                     </div>
                 </div>
             </div>
@@ -528,67 +528,22 @@
                     </h5>
                     <h1 class="mb-5">Our Clients Say!!!</h1>
                 </div>
+
+
                 <div class="owl-carousel testimonial-carousel">
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>
-                            Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor
-                            stet amet eirmod eos labore diam
-                        </p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg"
-                                style="width: 50px; height: 50px" />
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
+                    @foreach($testimonials as $testimonial)
+                        <div class="testimonial-item bg-transparent border rounded p-4">
+                            <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                            <p>{{ $testimonial->review }}</p>
+                            <div class="d-flex align-items-center">
+                                <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ asset('/assets/place_holder.jpeg') }}" style="width: 50px; height: 50px;">
+                                <div class="ps-3">
+                                    <h5 class="mb-1">{{ $testimonial->name }}</h5>
+                                    <small>{{ $testimonial->profession }}</small>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>
-                            Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor
-                            stet amet eirmod eos labore diam
-                        </p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-2.jpg"
-                                style="width: 50px; height: 50px" />
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>
-                            Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor
-                            stet amet eirmod eos labore diam
-                        </p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-3.jpg"
-                                style="width: 50px; height: 50px" />
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>
-                            Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor
-                            stet amet eirmod eos labore diam
-                        </p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-4.jpg"
-                                style="width: 50px; height: 50px" />
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

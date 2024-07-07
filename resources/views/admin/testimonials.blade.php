@@ -14,7 +14,7 @@
 
     <!-- Content Start -->
     <div class="content">
-        @include('admin.includes.navbar')fbg
+        @include('admin.includes.navbar')
 
         <!-- Orders Start -->
         <div class="container-fluid pt-4 px-4">

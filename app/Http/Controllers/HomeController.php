@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Events\UserAuthenticated;
+use App\Mail\SpecialOrderMail;
 use App\Models\Cart;
+use App\Models\Contact;
 use App\Models\Menu;
+use App\Models\SpecialOrder;
 use App\Models\Testimonial;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
@@ -17,16 +21,17 @@ class HomeController extends Controller
      public function index(){
 
      $menu = Menu::paginate(5);
-         return  view('home.index', ['items' => $menu, 'menus' => $menu]);
+         $testimonials = Testimonial::where('status', 'approved');
+         return  view('home.index', ['items' => $menu, 'menus' => $menu, 'testimonials' => $testimonials]);
      }
     public function testimonial(){
 
-        return view('home.testimonial');
+        $testimonials = Testimonial::where('status', 'approved');
+        return view('home.testimonial', ['testimonials' => $testimonials]);
     }
 
 
     public function food_menu(){
-
 
         $menu = Menu::paginate(5);
 
@@ -238,5 +243,57 @@ class HomeController extends Controller
 
         return redirect()->back()->with('success', 'Testimonial submitted successfully.');
 }
+
+
+
+    public function save_contacts(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        Contact::create($validatedData);
+
+        return redirect()->back()->with('success', 'Your message has been sent successfully!');
+    }
+
+
+
+    public function save_special_order(Request $request)
+    {
+        try {
+            $request->validate([
+                'order_type' => 'required|in:home_delivery,pick_up,dine_in',
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'phone_number' => 'required|string|max:20',
+                'date_time' => 'required|date',
+                'address' => 'nullable|string|max:255',
+                'menu' => 'nullable|string|max:255',
+                'special_request' => 'nullable|string',
+            ]);
+
+            $specialOrder =  SpecialOrder::create([
+                'order_type' => $request->order_type,
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone_number' => $request->phone_number,
+                'date_time' => $request->date_time,
+                'address' => $request->address,
+                'menu' => "null",
+                'special_request' => $request->special_request,
+            ]);
+
+            Mail::to(env('APP_MAIL'))->send(new SpecialOrderMail($specialOrder));
+
+            return redirect()->back()->with('success', 'Order placed successfully! . You will be contacted shortly');
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to place order. ' . $e->getMessage()], 500);
+        }
+    }
+
 
 }

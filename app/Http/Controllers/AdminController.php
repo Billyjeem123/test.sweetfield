@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SpecialOrderMail;
+use App\Models\Contact;
 use App\Models\Menu;
+use App\Models\SpecialOrder;
 use App\Models\Testimonial;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,8 +20,12 @@ class AdminController extends Controller
 
         $usersCount = User::all()->count();
         $menusCount = Menu::all()->count();
+        $orders = SpecialOrder::all()->count();
 
-        return  view('admin.index', ['usersCount' => $usersCount, 'menusCount' => $menusCount]);
+        $specialOrders = SpecialOrder::paginate(6);
+
+
+        return  view('admin.index', ['usersCount' => $usersCount,  'specialOrders' =>$specialOrders,    'orders' => $orders,   'menusCount' => $menusCount]);
     }
 
     public function menu(){
@@ -34,18 +41,14 @@ class AdminController extends Controller
 
     public function orders(){
 
-        return  view('admin.order');
+        $specialOrders = SpecialOrder::paginate(6);
+        return  view('admin.order', ['specialOrders' => $specialOrders]);
     }
 
     public function testimonials(){
 
         $testimonials = Testimonial::paginate(6);
         return  view('admin.testimonials', ['testimonials' => $testimonials]);
-    }
-
-    public function messages(){
-
-        return  view('admin.messages');
     }
 
 
@@ -262,6 +265,19 @@ class AdminController extends Controller
         $testimonial->save();
 
         return redirect()->route('testimonials')->with('status', 'Testimonial approved successfully.');
+    }
+
+    public function messages(){
+
+        $contacts = Contact::paginate(6);
+        return  view('admin.messages', ['contacts' => $contacts]);
+    }
+
+    public function delete_contact_messages($id)
+    {
+         $contact = Contact::find($id)->delete();
+
+        return redirect()->route('messages')->with('success', 'Contact information deleted successfully.');
     }
 
 

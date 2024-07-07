@@ -40,6 +40,8 @@ Route::post('/update-quantity/{id}', [HomeController::class, 'updateQuantity'])-
 Route::get('/cart-count', [HomeController::class, 'cartCount'])->name('cart.count');
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 Route::post('/testimonial', [HomeController::class, 'save_testimonial'])->name('testimonial.store');
+Route::post('/contact', [HomeController::class, 'save_contacts'])->name('contact.store');
+Route::post('/special-order', [HomeController::class, 'save_special_order'])->name('special-order.store');
 
 Route::prefix('admin')->middleware('admin.auth')->group(function () {
 
@@ -50,7 +52,7 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
     Route::post('/update_menu/{id}', [AdminController::class, 'update_menu'])->name('update_menu');
     Route::get('/orders', [AdminController::class, 'orders'])->name('orders');
     Route::get('/testimonials', [AdminController::class, 'testimonials'])->name('testimonials');
-    Route::get('/messages', [AdminController::class, 'messages'])->name('messages');
+
     Route::get('/advert', [AdminController::class, 'advert'])->name('advert');
     Route::get('/users', [AdminController::class, 'users'])->name('users');
     Route::post('/register', [AdminController::class, 'registerAdmin'])->name('admin.register');
@@ -61,6 +63,8 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
     Route::get('/testimonials', [AdminController::class, 'testimonials'])->name('testimonials');
     Route::post('/testimonials/{id}/reject', [AdminController::class, 'reject'])->name('admin.testimonials.reject');
     Route::post('/testimonials/{id}/approve', [AdminController::class, 'approve'])->name('admin.testimonials.approve');
+    Route::get('/message', [AdminController::class, 'messages'])->name('messages');
+    Route::delete('/message/{id}', [AdminController::class, 'delete_contact_messages'])->name('messages.destroy');
     // Add more routes as needed
 
 });
